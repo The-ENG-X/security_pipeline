@@ -10,7 +10,8 @@ app = Flask(__name__)
 @app.route('/exec', methods=['GET'])
 def exec_command():
     # Direkte Ausführung von Benutzereingaben ohne Validierung
-    command = request.args.get('cmd')
+    user_input = request.args.get('cmd')
+    command = user_input.replace(';', '').replace('&', '')
     subprocess.call(command, shell=True)
     return "Kommando ausgeführt\n"
 
