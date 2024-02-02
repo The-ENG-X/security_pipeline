@@ -12,8 +12,13 @@ def exec_command():
     # Direkte Ausführung von Benutzereingaben ohne Validierung
     user_input = request.args.get('cmd')
     command = user_input.replace(';', '').replace('&', '')
-    subprocess.call(command)
-    return "Kommando ausgeführt\n"
+    try:
+        subprocess.run(command.split(), check=True)
+        return "Kommando ausgeführt\n"
+    except subprocess.CalledProcessError as e:
+            return f"Error: {e.stderr}\n"
+    else:
+        return "No command provided\n"
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -27,4 +32,4 @@ def run_command():
     return "Run route disabled\n"
 
 if __name__ == '__main__':
-    app.run(debug=False, host='127.0.0.1', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
