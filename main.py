@@ -22,10 +22,7 @@ def upload_file():
 
 @app.route('/run', methods=['POST'])
 def run_command():
-    command = request.form['command']
-    # Unsichere Verwendung von os.system für Benutzereingaben
-    os.system(command)
-    return "Kommando ausgeführt\n"
+    return "Run route disabled\n"
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
