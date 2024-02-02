@@ -12,7 +12,7 @@ def exec_command():
     # Direkte Ausführung von Benutzereingaben ohne Validierung
     user_input = request.args.get('cmd')
     command = user_input.replace(';', '').replace('&', '')
-    subprocess.call(command, shell=True)
+    subprocess.call(command)
     return "Kommando ausgeführt\n"
 
 @app.route('/upload', methods=['POST'])
