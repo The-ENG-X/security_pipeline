@@ -3,6 +3,7 @@ from flask import Flask, request
 import os
 import subprocess
 import pickle
+import json
 
 app = Flask(__name__)
 
@@ -17,7 +18,7 @@ def exec_command():
 def upload_file():
     # Unsichere Deserialisierung von Benutzereingaben
     file = request.files['file'].read()
-    data = pickle.loads(file)
+    data = json.loads(file)
     return "Datei hochgeladen\n"
 
 @app.route('/run', methods=['POST'])
